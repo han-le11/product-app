@@ -14,7 +14,4 @@ dotnet run
 The output JSON file of products grouped by their categories can be found in `grouped_products.json`.  
 
 # Testing
-Unit tests still need to be added. Necessary test cases for example are:
-
-1. The products fetched from https://fakestoreapi.com/products are grouped and sorted correctly.
-2. `FetchProductsAsync` should be tested that it throw Exception if given invalid Url.
+Unit tests still need to be added. Necessary test cases for example are the products fetched from https://fakestoreapi.com/products are grouped and sorted correctly.
