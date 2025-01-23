@@ -102,4 +102,45 @@ namespace ProductAggregator
                     group => group.Select(p => new GroupedProduct
                     {
                         Id = p.Id,
-                   
+                        Title = p.Title,
+                        Price = p.Price
+                    }).OrderBy(p => p.Price).ToList()
+                );
+        }
+
+        /// <summary>
+        /// Save grouped products to JSON file.
+        /// </summary>
+        /// <param name="groupedProducts"></param>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
+        static async Task SaveGroupedProductsToJsonFile(Dictionary<string, List<GroupedProduct>> groupedProducts, string filePath)
+        {
+            Console.WriteLine("Saving grouped products to JSON file...");
+
+            // Use JsonSerializerOptions to format the JSON output with indentation 
+            var options = new JsonSerializerOptions { WriteIndented = true };
+
+            var jsonProductContent = JsonSerializer.Serialize(groupedProducts, options);
+
+            // Async create a new file and write to file 
+            await File.WriteAllTextAsync(filePath, jsonProductContent); 
+        }
+    }
+
+    public class Product
+    {
+        public int Id { get; set; }
+        public string? Title { get; set; }
+        public decimal Price { get; set; }
+        public string? Category { get; set; }
+        public string? Description { get; set; }
+    }
+
+    public class GroupedProduct
+    {
+        public int Id { get; set; }
+        public string? Title { get; set; }
+        public decimal Price { get; set; }
+    }
+}
