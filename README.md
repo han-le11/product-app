@@ -14,4 +14,6 @@ dotnet run
 The output JSON file of products grouped by their categories can be found in `grouped_products.json`.  
 
 # Testing
-Unit tests still need to be added. Necessary test cases for example are the products fetched from https://fakestoreapi.com/products are grouped and sorted correctly.
+Unit tests still need to be added. Necessary test cases for example are the products fetched from https://fakestoreapi.com/products are grouped and sorted correctly. 
+
+
