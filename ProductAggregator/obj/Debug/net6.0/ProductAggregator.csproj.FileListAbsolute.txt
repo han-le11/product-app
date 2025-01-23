@@ -1,0 +1,15 @@
+/Users/hanle/Desktop/product-app/ProductAggregator/bin/Debug/net6.0/ProductAggregator
+/Users/hanle/Desktop/product-app/ProductAggregator/bin/Debug/net6.0/ProductAggregator.deps.json
+/Users/hanle/Desktop/product-app/ProductAggregator/bin/Debug/net6.0/ProductAggregator.runtimeconfig.json
+/Users/hanle/Desktop/product-app/ProductAggregator/bin/Debug/net6.0/ProductAggregator.dll
+/Users/hanle/Desktop/product-app/ProductAggregator/bin/Debug/net6.0/ProductAggregator.pdb
+/Users/hanle/Desktop/product-app/ProductAggregator/obj/Debug/net6.0/ProductAggregator.csproj.AssemblyReference.cache
+/Users/hanle/Desktop/product-app/ProductAggregator/obj/Debug/net6.0/ProductAggregator.GeneratedMSBuildEditorConfig.editorconfig
+/Users/hanle/Desktop/product-app/ProductAggregator/obj/Debug/net6.0/ProductAggregator.AssemblyInfoInputs.cache
+/Users/hanle/Desktop/product-app/ProductAggregator/obj/Debug/net6.0/ProductAggregator.AssemblyInfo.cs
+/Users/hanle/Desktop/product-app/ProductAggregator/obj/Debug/net6.0/ProductAggregator.csproj.CoreCompileInputs.cache
+/Users/hanle/Desktop/product-app/ProductAggregator/obj/Debug/net6.0/ProductAggregator.dll
+/Users/hanle/Desktop/product-app/ProductAggregator/obj/Debug/net6.0/refint/ProductAggregator.dll
+/Users/hanle/Desktop/product-app/ProductAggregator/obj/Debug/net6.0/ProductAggregator.pdb
+/Users/hanle/Desktop/product-app/ProductAggregator/obj/Debug/net6.0/ProductAggregator.genruntimeconfig.cache
+/Users/hanle/Desktop/product-app/ProductAggregator/obj/Debug/net6.0/ref/ProductAggregator.dll
