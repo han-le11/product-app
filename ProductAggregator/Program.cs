@@ -8,7 +8,7 @@ using System.Text.Json;
 
 namespace ProductAggregator
 {
-    class Program
+    public class Program
     {
         /// <summary>
         /// Main entry point of the program, with console logging to track progress and error.
@@ -49,7 +49,7 @@ namespace ProductAggregator
                 {
                     Console.WriteLine("Fetching products from API...");
 
-                    var response = await httpClient.GetAsync(apiUrl);
+                    var response = await httpClient.GetAsync(apiUrl);  // Send a GET request to the endpoint
 
                     response.EnsureSuccessStatusCode(); 
 
