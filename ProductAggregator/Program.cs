@@ -22,7 +22,7 @@ namespace ProductAggregator
             {
                 var products = await FetchProductsAsync();
                 var groupedProducts = GroupProductsByCategory(products);
-                string outputFilePath = "grouped_products.json";
+                string outputFilePath = "grouped_products.json";  // Default output file path
                 await SaveGroupedProductsToJsonFile(groupedProducts, outputFilePath);
 
                 Console.WriteLine($"Product aggregation completed. Output saved to {outputFilePath}");
@@ -40,6 +40,8 @@ namespace ProductAggregator
         static async Task<List<Product>> FetchProductsAsync()
         {
             const string apiUrl = "https://fakestoreapi.com/products";
+
+            // Use the using statement to ensure the HttpClient is properly disposed of
             using var httpClient = new HttpClient();
             
             // Retry up to 3 times (with 2 second intervals) if API call fails
@@ -51,9 +53,12 @@ namespace ProductAggregator
 
                     var response = await httpClient.GetAsync(apiUrl);  // Send a GET request to the endpoint
 
-                    response.EnsureSuccessStatusCode(); 
+                    response.EnsureSuccessStatusCode();
 
-                    var jsonResponse = await response.Content.ReadAsStringAsync();
+                    var jsonResponse = await response.Content.ReadAsStringAsync();  // Read the response content as a string
+
+                    // Deserialize the JSON response content into a list of Product objects. 
+                    // Set an option to ignore case sensitivity in property names.
                     var products = JsonSerializer.Deserialize<List<Product>>(jsonResponse, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
                     if (products == null || products.Count == 0)
@@ -77,16 +82,19 @@ namespace ProductAggregator
         }
 
         /// <summary>
-        /// Group products by category.
+        /// Group products by category. 
+        /// If a product’s category is empty or has only whitespace, by default it is assigned to Uncategorized. 
+        /// For each product, include Id, Title, and Price.
         /// </summary>
         /// <param name="products"></param>
-        /// <returns>A list of products grouped by category.</returns>
-        static Dictionary<string, List<GroupedProduct>> GroupProductsByCategory(List<Product> products)
+        /// <returns>A dictionary, where key is a category and value is a list of products grouped by category.</returns>
+        public static Dictionary<string, List<GroupedProduct>> GroupProductsByCategory(List<Product> products)
         {   
             const string DefaultCategory = "Uncategorized";
 
             Console.WriteLine("Grouping products by category...");
 
+            // Group products by Category (which acts as dictionary key) and sort each group by ascending price 
             return products
                 .GroupBy(p => string.IsNullOrWhiteSpace(p.Category) ? DefaultCategory : p.Category)
                 .ToDictionary(
@@ -94,46 +102,4 @@ namespace ProductAggregator
                     group => group.Select(p => new GroupedProduct
                     {
                         Id = p.Id,
-                        Title = p.Title,
-                        Price = p.Price
-                    }).OrderBy(p => p.Price).ToList()
-                );
-        }
-
-        /// <summary>
-        /// Save grouped products to JSON file.
-        /// </summary>
-        /// <param name="groupedProducts"></param>
-        /// <param name="filePath"></param>
-        /// <returns></returns>
-        static async Task SaveGroupedProductsToJsonFile(Dictionary<string, List<GroupedProduct>> groupedProducts, string filePath)
-        {
-            Console.WriteLine("Saving grouped products to JSON file...");
-
-            var options = new JsonSerializerOptions
-            {
-                WriteIndented = true  // Format the output JSON with indentation for readability
-            };
-
-            var jsonProductContent = JsonSerializer.Serialize(groupedProducts, options);
-
-            await File.WriteAllTextAsync(filePath, jsonProductContent); 
-        }
-    }
-
-    public class Product
-    {
-        public int Id { get; set; }
-        public string? Title { get; set; }
-        public decimal Price { get; set; }
-        public string? Category { get; set; }
-        public string? Description { get; set; }
-    }
-
-    public class GroupedProduct
-    {
-        public int Id { get; set; }
-        public string? Title { get; set; }
-        public decimal Price { get; set; }
-    }
-}
+                   
