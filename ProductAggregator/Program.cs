@@ -82,11 +82,13 @@ namespace ProductAggregator
         /// <param name="products"></param>
         /// <returns>A list of products grouped by category.</returns>
         static Dictionary<string, List<GroupedProduct>> GroupProductsByCategory(List<Product> products)
-        {
+        {   
+            const string DefaultCategory = "Uncategorized";
+
             Console.WriteLine("Grouping products by category...");
 
             return products
-                .GroupBy(p => p.Category)
+                .GroupBy(p => string.IsNullOrWhiteSpace(p.Category) ? DefaultCategory : p.Category)
                 .ToDictionary(
                     group => group.Key,
                     group => group.Select(p => new GroupedProduct
@@ -124,7 +126,7 @@ namespace ProductAggregator
         public int Id { get; set; }
         public string? Title { get; set; }
         public decimal Price { get; set; }
-        public string Category { get; set; }
+        public string? Category { get; set; }
         public string? Description { get; set; }
     }
 
